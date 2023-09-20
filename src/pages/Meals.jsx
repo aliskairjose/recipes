@@ -25,6 +25,7 @@ export default function Meals() {
     setQuery({ q: _search });
   };
 
+
   return (
     <div className="flex flex-row xl:w-11/12 xl:mx-auto w-full gap-2 min-h-screen py-8">
       <div className="w-1/5 p-2 border rounded border-gray-300 pt-8">

@@ -2,34 +2,97 @@ import { createRef, useRef } from "react";
 import PropTypes from "prop-types";
 
 const DIETS_COL1 = [
-  { title: "Vegetarian" },
-  { title: "Vegan" },
-  { title: "Paleo" },
-  { title: "High-Fiber" },
-  { title: "High-Protein" },
-  { title: "Low-Carb" },
+  { 
+    checked: false,
+    value: 'vegetarian',
+    title: "Vegetarian" },
+  { 
+    checked: false,
+    value: 'vegan',
+    title: "Vegan" },
+  { 
+    checked: false,
+    value: 'paleo',
+    title: "Paleo" },
+  { 
+    checked: false,
+    value: 'high-fiber',
+    title: "High-Fiber" },
+  { 
+    checked: false,
+    value: 'high-protein',
+    title: "High-Protein" },
+  { 
+    checked: false,
+    value: 'low-carb',
+    title: "Low-Carb" },
 ];
 const DIETS_COL2 = [
-  { title: "Low-Fat" },
-  { title: "Low-Sodium" },
-  { title: "Low-Sugar" },
-  { title: "Alcohol-Free" },
-  { title: "Balanced" },
-  { title: "Inmunity" },
+  { 
+    checked: false,
+    value: 'low-fat',
+    title: "Low-Fat" },
+  { 
+    checked: false,
+    value: 'low-sodium',
+    title: "Low-Sodium" },
+  { 
+    checked: false,
+    value: 'low-sugar',
+    title: "Low-Sugar" },
+  { 
+    checked: false,
+    value: 'alcohol-free',
+    title: "Alcohol-Free" },
+  { 
+    checked: false,
+    value: 'Balanced',
+    title: "Balanced" },
+  { 
+    checked: false,
+    value: 'inmunity',
+    title: "Inmunity" },
 ];
 
 const ALLERGIES_COL1 = [
-  { title: "Gluten" },
-  { title: "Dairy" },
-  { title: "Eggs" },
-  { title: "Soy" },
-  { title: "Wheat" },
+  { 
+    checked: false,
+    value: 'gluten-free',
+    title: "Gluten" },
+  { 
+    checked: false,
+    value: 'dairy',
+    title: "Dairy" },
+  { 
+    checked: false,
+    value: 'eggs-free',
+    title: "Eggs" },
+  { 
+    checked: false,
+    value: 'soy-free',
+    title: "Soy" },
+  { 
+    checked: false,
+    value: 'wheat-free',
+    title: "Wheat" },
 ];
 const ALLERGIES_COL2 = [
-  { title: "Fish" },
-  { title: "Shellfish" },
-  { title: "Tree Nuts" },
-  { title: "Peanuts" },
+  { 
+    checked: false,
+    value: 'fish-free',
+    title: "Fish" },
+  { 
+    checked: false,
+    value: 'shellfish-free',
+    title: "Shellfish" },
+  { 
+    checked: false,
+    value: 'tree-nut-free',
+    title: "Tree Nuts" },
+  { 
+    checked: false,
+    value: 'peanut-free',
+    title: "Peanuts" },
 ];
 
 export default function Filter({ onSearchAction }) {
@@ -41,12 +104,17 @@ export default function Filter({ onSearchAction }) {
     onSearchAction(inputRef.current.value);
   };
 
+  const checkboxHandle = (checked, type) => {
+    console.log(checked)
+    console.log(type)
+  }
+
   return (
     <form className="" onSubmit={handleOnSubmit}>
       <div className="mb-4 flex flex-col justify-center items-center">
         <input
           className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-          id="username"
+          id="search"
           type="text"
           placeholder="Buscar receta..."
           ref={inputRef}
@@ -74,9 +142,10 @@ export default function Filter({ onSearchAction }) {
               {DIETS_COL1.map((item, index) => (
                 <div className="flex items-center mb-2" key={index}>
                   <input
-                    id="default-checkbox"
+                    id={item.value}
                     type="checkbox"
-                    value=""
+                    value={item.value}
+                    onChange={(event)=> checkboxHandle(event.target.checked, 'DIETS_COL1')}
                     className=" text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
                   />
                   <label className="ml-2 text-sm text-gray-900 dark:text-gray-300">
@@ -93,9 +162,9 @@ export default function Filter({ onSearchAction }) {
               {DIETS_COL2.map((item, index) => (
                 <div className="flex items-center mb-2" key={index}>
                   <input
-                    id="default-checkbox"
+                    id={item.value}
                     type="checkbox"
-                    value=""
+                    value={item.value}
                     className=" text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
                   />
                   <label className="ml-2 text-sm">{item.title}</label>
@@ -114,9 +183,9 @@ export default function Filter({ onSearchAction }) {
               {ALLERGIES_COL1.map((item, index) => (
                 <div className="flex items-center mb-2" key={index}>
                   <input
-                    id="default-checkbox"
+                    id={item.value}
                     type="checkbox"
-                    value=""
+                    value={item.value}
                     className=" text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
                   />
                   <label className="ml-2 text-sm text-gray-900 dark:text-gray-300">
@@ -133,9 +202,9 @@ export default function Filter({ onSearchAction }) {
               {ALLERGIES_COL2.map((item, index) => (
                 <div className="flex items-center mb-2" key={index}>
                   <input
-                    id="default-checkbox"
+                    id={item.value}
                     type="checkbox"
-                    value=""
+                    value={item.value}
                     className=" text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
                   />
                   <label className="ml-2 text-sm">{item.title}</label>
