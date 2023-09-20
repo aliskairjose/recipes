@@ -26,11 +26,11 @@ export default function Meals() {
   };
 
   return (
-    <div className="flex flex-row xl:w-11/12 xl:mx-auto w-full gap-2 min-h-screen">
-      <div className="w-1/5 p-2 bg-gray-300 pt-12">
+    <div className="flex flex-row xl:w-11/12 xl:mx-auto w-full gap-2 min-h-screen py-8">
+      <div className="w-1/5 p-2 border rounded border-gray-300 pt-8">
         <Filter onSearchAction={onSearch} />
       </div>
-      <div className="flex flex-row gap-2 flex-wrap w-4/5 bg-gray-100">
+      <div className="flex flex-row gap-2 flex-wrap w-4/5">
         {isLoading ? (
           <Spinner />
         ) : (
