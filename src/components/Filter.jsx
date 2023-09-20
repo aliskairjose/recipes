@@ -1,23 +1,29 @@
-import { useRef } from "react";
+import { createRef, useRef } from "react";
 import PropTypes from "prop-types";
 
 export default function Filter({ onSearchAction }) {
   const term = useRef(null)
-  const onSearchChange = (e) => (term.current = e.target.value);
+  const inputRef = createRef();
+  const onSearchChange = (e) => (term.current = e);
+  const handleOnSubmit = (e) => {
+    e.preventDefault()
+    onSearchAction(inputRef.current.value)
+  }
 
   return (
-    <form className="">
+    <form className="" onSubmit={handleOnSubmit}>
       <div className="mb-4">
         <input
           className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
           id="username"
           type="text"
           placeholder="Buscar receta..."
-          onChange={onSearchChange}
+          ref={inputRef}
+          onChange={(event)=>onSearchChange(event.target.value)}
         />
       </div>
       <button
-        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+        className="bg-blue-500 hover:bg-blue-700 text-white py-2 px-4 rounded focus:outline-none focus:shadow-outline"
         type="button"
         onClick={() => onSearchAction(term.current)}
       >

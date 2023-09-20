@@ -22,15 +22,15 @@ export default function Meals() {
 
   const onSearch = (_search) => {
     setIsLoading(true);
-    setQuery({q:_search})
-  }
-  
+    setQuery({ q: _search });
+  };
+
   return (
-    <div className="flex flex-row xl:w-10/12 xl:mx-auto w-full bg-gray-100 gap-2">
-      <div className="w-1/6 p-2">
+    <div className="flex flex-row xl:w-10/12 xl:mx-auto w-full gap-2 min-h-screen">
+      <div className="w-1/5 p-2 bg-gray-300 pt-12">
         <Filter onSearchAction={onSearch} />
       </div>
-      <div className="flex flex-row gap-2 flex-wrap w-5/6 ">
+      <div className="flex flex-row gap-2 flex-wrap w-4/5 bg-gray-100">
         {isLoading ? (
           <Spinner />
         ) : (
