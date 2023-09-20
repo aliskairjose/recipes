@@ -6,7 +6,7 @@ import Filter from "../components/Filter";
 
 export default function Meals() {
   const [data, setData] = useState(null);
-  const [query, setQuery] = useState({});
+  const [query, setQuery] = useState({ q: "" });
   const [isLoading, setIsLoading] = useState(true);
   const params = useRef({});
 
