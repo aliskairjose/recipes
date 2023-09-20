@@ -13,7 +13,7 @@ const instance = axios.create({
 });
 
 export const recipes = async (term = null) => {
-  // console.log(term);
+  console.log(term);
   const { q } = term;
   return await instance
     .get("search", { params: { q } })
