@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from "prop-types";
 
 export default function MealCard({meal}) {
   return (
@@ -14,4 +15,8 @@ export default function MealCard({meal}) {
       </div>
     </div>
   )
+}
+
+MealCard.propTypes = {
+  meal: PropTypes.object,
 }
