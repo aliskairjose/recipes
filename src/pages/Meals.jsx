@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { recipes } from "../providers/meal";
 import Spinner from "../components/Spinner";
 import MealCard from "../components/MealCard";
@@ -21,9 +21,8 @@ export default function Meals() {
   }, [query]);
 
   const onSearch = (_search) => {
-    console.log(_search)
     setIsLoading(true);
-    setQuery(_search)
+    setQuery({q:_search})
   }
   
   return (
