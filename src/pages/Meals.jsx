@@ -30,7 +30,7 @@ export default function Meals() {
       <div className="w-1/5 p-2 bg-gray-300 pt-12">
         <Filter onSearchAction={onSearch} />
       </div>
-      <div className="flex flex-row gap-2 flex-wrap w-4/5 bg-gray-100">
+      <div className="flex flex-row gap-4 flex-wrap w-4/5 bg-gray-100">
         {isLoading ? (
           <Spinner />
         ) : (
