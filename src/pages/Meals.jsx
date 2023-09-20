@@ -6,7 +6,7 @@ import Filter from "../components/Filter";
 
 export default function Meals() {
   const [data, setData] = useState(null);
-  const [query, setQuery] = useState({ q: "" });
+  const [query, setQuery] = useState({});
   const [isLoading, setIsLoading] = useState(true);
   const params = useRef({});
 
@@ -20,9 +20,10 @@ export default function Meals() {
     getData().catch(console.error);
   }, [query]);
 
-  const onSearch = (_search) => {
+  const onSearch = (params) => {
+    console.log(params)
     setIsLoading(true);
-    setQuery({ q: _search });
+    setQuery(params);
   };
 
 

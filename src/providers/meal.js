@@ -12,10 +12,9 @@ const instance = axios.create({
   },
 });
 
-export const recipes = async (term = null) => {
-  const { q } = term;
+export const recipes = async (params) => {
   return await instance
-    .get("search", { params: { q } })
+    .get("search", { params })
     .then((response) => response.data)
     .catch(console.error);
 };

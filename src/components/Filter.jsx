@@ -2,112 +2,167 @@ import { createRef, useRef } from "react";
 import PropTypes from "prop-types";
 
 const DIETS_COL1 = [
-  { 
+  {
     checked: false,
-    value: 'vegetarian',
-    title: "Vegetarian" },
-  { 
+    value: "vegetarian",
+    title: "Vegetarian",
+  },
+  {
     checked: false,
-    value: 'vegan',
-    title: "Vegan" },
-  { 
+    value: "vegan",
+    title: "Vegan",
+  },
+  {
     checked: false,
-    value: 'paleo',
-    title: "Paleo" },
-  { 
+    value: "paleo",
+    title: "Paleo",
+  },
+  {
     checked: false,
-    value: 'high-fiber',
-    title: "High-Fiber" },
-  { 
+    value: "high-fiber",
+    title: "High-Fiber",
+  },
+  {
     checked: false,
-    value: 'high-protein',
-    title: "High-Protein" },
-  { 
+    value: "high-protein",
+    title: "High-Protein",
+  },
+  {
     checked: false,
-    value: 'low-carb',
-    title: "Low-Carb" },
+    value: "low-carb",
+    title: "Low-Carb",
+  },
 ];
 const DIETS_COL2 = [
-  { 
+  {
     checked: false,
-    value: 'low-fat',
-    title: "Low-Fat" },
-  { 
+    value: "low-fat",
+    title: "Low-Fat",
+  },
+  {
     checked: false,
-    value: 'low-sodium',
-    title: "Low-Sodium" },
-  { 
+    value: "low-sodium",
+    title: "Low-Sodium",
+  },
+  {
     checked: false,
-    value: 'low-sugar',
-    title: "Low-Sugar" },
-  { 
+    value: "low-sugar",
+    title: "Low-Sugar",
+  },
+  {
     checked: false,
-    value: 'alcohol-free',
-    title: "Alcohol-Free" },
-  { 
+    value: "alcohol-free",
+    title: "Alcohol-Free",
+  },
+  {
     checked: false,
-    value: 'Balanced',
-    title: "Balanced" },
-  { 
+    value: "Balanced",
+    title: "Balanced",
+  },
+  {
     checked: false,
-    value: 'inmunity',
-    title: "Inmunity" },
+    value: "inmunity",
+    title: "Inmunity",
+  },
 ];
-
 const ALLERGIES_COL1 = [
-  { 
+  {
     checked: false,
-    value: 'gluten-free',
-    title: "Gluten" },
-  { 
+    value: "gluten-free",
+    title: "Gluten",
+  },
+  {
     checked: false,
-    value: 'dairy',
-    title: "Dairy" },
-  { 
+    value: "dairy",
+    title: "Dairy",
+  },
+  {
     checked: false,
-    value: 'eggs-free',
-    title: "Eggs" },
-  { 
+    value: "eggs-free",
+    title: "Eggs",
+  },
+  {
     checked: false,
-    value: 'soy-free',
-    title: "Soy" },
-  { 
+    value: "soy-free",
+    title: "Soy",
+  },
+  {
     checked: false,
-    value: 'wheat-free',
-    title: "Wheat" },
+    value: "wheat-free",
+    title: "Wheat",
+  },
 ];
 const ALLERGIES_COL2 = [
-  { 
+  {
     checked: false,
-    value: 'fish-free',
-    title: "Fish" },
-  { 
+    value: "fish-free",
+    title: "Fish",
+  },
+  {
     checked: false,
-    value: 'shellfish-free',
-    title: "Shellfish" },
-  { 
+    value: "shellfish-free",
+    title: "Shellfish",
+  },
+  {
     checked: false,
-    value: 'tree-nut-free',
-    title: "Tree Nuts" },
-  { 
+    value: "tree-nut-free",
+    title: "Tree Nuts",
+  },
+  {
     checked: false,
-    value: 'peanut-free',
-    title: "Peanuts" },
+    value: "peanut-free",
+    title: "Peanuts",
+  },
 ];
 
 export default function Filter({ onSearchAction }) {
-  const term = useRef(null);
+  const params = useRef(null);
   const inputRef = createRef();
-  const onSearchChange = (e) => (term.current = e);
+
+  const onSearchChange = (e) => (params.current = { q: e });
+
+  const onClickHandler = () => onSearchAction(params.current)
+
   const handleOnSubmit = (e) => {
     e.preventDefault();
-    onSearchAction(inputRef.current.value);
+    onSearchAction(params.current);
   };
 
-  const checkboxHandle = (checked, type) => {
-    console.log(checked)
-    console.log(type)
-  }
+  const checkboxHandle = ({ target }) => {
+    const { checked, value, id } = target;
+    if (value === "DIETS_COL1") {
+      DIETS_COL1.map((item) => {
+        if (item.value === id) {
+          return (item.checked = checked);
+        }
+      });
+      return;
+    }
+    if (value === "DIETS_COL2") {
+      DIETS_COL2.map((item) => {
+        if (item.value === id) {
+          return (item.checked = checked);
+        }
+      });
+      return;
+    }
+    if (value === "ALLERGIES_COL1") {
+      ALLERGIES_COL1.map((item) => {
+        if (item.value === id) {
+          return (item.checked = checked);
+        }
+      });
+      return;
+    }
+    if (value === "ALLERGIES_COL2") {
+      ALLERGIES_COL2.map((item) => {
+        if (item.value === id) {
+          return (item.checked = checked);
+        }
+      });
+      return;
+    }
+  };
 
   return (
     <form className="" onSubmit={handleOnSubmit}>
@@ -123,7 +178,7 @@ export default function Filter({ onSearchAction }) {
         <button
           className="bg-blue-500 hover:bg-blue-700 text-white py-2 px-4 mt-4 rounded focus:outline-none focus:shadow-outline w-1/2"
           type="button"
-          onClick={() => onSearchAction(term.current)}
+          onClick={onClickHandler}
         >
           Search
         </button>
@@ -133,7 +188,7 @@ export default function Filter({ onSearchAction }) {
           Refine search by
         </span>
       </div>
-      
+
       <span className="text-sm block font-medium">Diet</span>
       <div className="grid grid-cols-2 mb-4 mt-2">
         <div>
@@ -144,8 +199,8 @@ export default function Filter({ onSearchAction }) {
                   <input
                     id={item.value}
                     type="checkbox"
-                    value={item.value}
-                    onChange={(event)=> checkboxHandle(event.target.checked, 'DIETS_COL1')}
+                    value="DIETS_COL1"
+                    onChange={checkboxHandle}
                     className=" text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
                   />
                   <label className="ml-2 text-sm text-gray-900 dark:text-gray-300">
@@ -164,7 +219,7 @@ export default function Filter({ onSearchAction }) {
                   <input
                     id={item.value}
                     type="checkbox"
-                    value={item.value}
+                    value="DIETS_COL2"
                     className=" text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
                   />
                   <label className="ml-2 text-sm">{item.title}</label>
