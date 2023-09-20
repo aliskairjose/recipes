@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 
 export default function MealCard({meal}) {
   return (
-    <div className='h-[370px] w-[260px] rounded overflow-hidden shadow-md border border-gray-300'>
+    <div className='h-[370px] w-[265px] rounded overflow-hidden shadow-md border border-gray-300'>
       <img className="p-2" src={meal.image} alt={meal.label} />
       <div className="p-2">
         <div className='text-sm h-10'>{meal.label}</div>
