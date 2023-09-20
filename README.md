@@ -10,3 +10,4 @@ Currently, two official plugins are available:
 Api de recetas
 
 - [EDAMAN - Recetas](https://developer.edamam.com/es/api-recetas-edamam-documentacion) API Buscador de Recetas Edamam
+- [TheCocktailApi](https://www.thecocktaildb.com/api.php) Api de cocteles
