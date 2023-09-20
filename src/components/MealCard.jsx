@@ -10,7 +10,7 @@ export default function MealCard({meal}) {
           <div >180 calorias</div>
           <div >{meal.ingredients.length} ingredientes</div>
         </div>
-        <a href={meal.shareAs} className='text-xs text-gray-500 font-semibold'>{meal.source}</a>
+        <a href={meal.url} className='text-xs text-gray-500 font-semibold'>{meal.source}</a>
       </div>
     </div>
   )
