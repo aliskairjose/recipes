@@ -121,10 +121,24 @@ export default function Filter({ onSearchAction }) {
 
   const onSearchChange = (e) => (params.current = { q: e });
 
-  const onClickHandler = () => onSearchAction(params.current)
+  const onClickHandler = () => sendParams();
 
   const handleOnSubmit = (e) => {
     e.preventDefault();
+    sendParams();
+  };
+
+  const sendParams = () => {
+    const diet = [...DIETS_COL1, ...DIETS_COL2];
+    const health = [...ALLERGIES_COL1, ...ALLERGIES_COL2];
+    diet.map((d) => {
+      if (d.checked) {
+        params.current = {diet: d.value} 
+        console.log(d.value, params)
+      }
+    });
+    console.log(diet, health);
+    console.log(params.current)
     onSearchAction(params.current);
   };
 
@@ -170,7 +184,7 @@ export default function Filter({ onSearchAction }) {
         <input
           className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
           id="search"
-          type="text"
+          type="search"
           placeholder="Buscar receta..."
           ref={inputRef}
           onChange={(event) => onSearchChange(event.target.value)}
@@ -221,6 +235,7 @@ export default function Filter({ onSearchAction }) {
                     type="checkbox"
                     value="DIETS_COL2"
                     className=" text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                    onChange={checkboxHandle}
                   />
                   <label className="ml-2 text-sm">{item.title}</label>
                 </div>
@@ -242,6 +257,7 @@ export default function Filter({ onSearchAction }) {
                     type="checkbox"
                     value={item.value}
                     className=" text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                    onChange={checkboxHandle}
                   />
                   <label className="ml-2 text-sm text-gray-900 dark:text-gray-300">
                     {item.title}
@@ -261,6 +277,7 @@ export default function Filter({ onSearchAction }) {
                     type="checkbox"
                     value={item.value}
                     className=" text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                    onChange={checkboxHandle}
                   />
                   <label className="ml-2 text-sm">{item.title}</label>
                 </div>
