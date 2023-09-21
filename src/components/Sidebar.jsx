@@ -1,12 +1,7 @@
 import Filter from "./Filter";
-import Footer from "./Footer";
 
 export default function Sidebar() {
   return (
-    // <aside classNameName="flex-shrink w-[280px] px-4">
-    //   <Filter />
-    // </aside>
-
     <>
       <button
         data-drawer-target="default-sidebar"
@@ -32,7 +27,7 @@ export default function Sidebar() {
       </button>
       <aside
         id="default-sidebar"
-        className="fixed top-0 left-0 z-40 lg:w-64 w-52 h-screen transition-transform -translate-x-full sm:translate-x-0 px-4 pt-8"
+        className="fixed top-0 left-0 z-20 lg:w-64 w-52 h-screen transition-transform -translate-x-full sm:translate-x-0 px-4 pt-8 border-r my-4"
         aria-label="Sidebar"
       >
         <Filter />
