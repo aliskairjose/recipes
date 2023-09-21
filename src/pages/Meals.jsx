@@ -7,7 +7,7 @@ import Footer from "../components/Footer";
 
 export default function Meals() {
   const [data, setData] = useState(null);
-  const [query, setQuery] = useState('&q=');
+  const [query, setQuery] = useState("&q=");
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -26,22 +26,22 @@ export default function Meals() {
   };
 
   return (
-    <>
-    <div className="flex flex-row xl:w-11/12 xl:mx-auto w-full gap-2 min-h-screen py-8">
-      <div className="w-1/5 p-2 border rounded border-gray-300 pt-8">
-        <Filter onSearchAction={onSearch} />
+    <div className="flex flex-col min-h-screen">
+      <div className="flex">
+        <nav className="flex-shrink w-[280px] px-4 py-8">
+          <Filter onSearchAction={onSearch} />
+        </nav>
+        <main className="flex flex-wrap w-[calc(100%-280px)] gap-3 py-8">
+          {isLoading ? (
+            <Spinner />
+          ) : (
+            data?.hits.map((item, index) => (
+              <MealCard meal={item.recipe} key={index} />
+            ))
+          )}
+        </main>
       </div>
-      <div className="flex flex-row gap-2 flex-wrap w-4/5">
-        {isLoading ? (
-          <Spinner />
-        ) : (
-          data?.hits.map((item, index) => (
-            <MealCard meal={item.recipe} key={index} />
-          ))
-        )}
-      </div>
+      <Footer />
     </div>
-    <Footer />
-    </>
   );
 }
