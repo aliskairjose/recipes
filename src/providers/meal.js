@@ -5,16 +5,18 @@ const appKEY = import.meta.env.VITE_API_KEY;
 
 const instance = axios.create({
   baseURL: "https://api.edamam.com/",
-  params: {
-    app_id: appID,
-    app_key: appKEY,
-    q: "",
-  },
+  // params: {
+  //   app_id: appID,
+  //   app_key: appKEY,
+  //   q: "",
+  // },
 });
+const slug = `?app_id=${appID}&app_key=${appKEY}`
 
 export const recipes = async (params) => {
+  console.log(params)
   return await instance
-    .get("search", { params })
+    .get(`search${slug}${params}`)
     .then((response) => response.data)
     .catch(console.error);
 };

@@ -5,15 +5,15 @@ import MealCard from "../components/MealCard";
 import Filter from "../components/Filter";
 
 export default function Meals() {
-  const params = useRef({});
+  // const params = useRef(null);
   const [data, setData] = useState(null);
-  const [query, setQuery] = useState({});
+  const [query, setQuery] = useState('&q=');
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    params.current = query;
+    // params.current = query;
     const getData = async () => {
-      const response = await recipes(params.current);
+      const response = await recipes(query);
       setData(response);
       setIsLoading(false);
     };

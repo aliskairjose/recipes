@@ -6,31 +6,37 @@ const DIETS_COL1 = [
     checked: false,
     value: "vegetarian",
     title: "Vegetarian",
+    type: "health"
   },
   {
     checked: false,
     value: "vegan",
     title: "Vegan",
+    type: "health"
   },
   {
     checked: false,
     value: "paleo",
     title: "Paleo",
+    type: "health"
   },
   {
     checked: false,
     value: "high-fiber",
     title: "High-Fiber",
+    type: "diet"
   },
   {
     checked: false,
     value: "high-protein",
     title: "High-Protein",
+    type: "diet"
   },
   {
     checked: false,
     value: "low-carb",
     title: "Low-Carb",
+    type: "diet"
   },
 ];
 const DIETS_COL2 = [
@@ -38,31 +44,37 @@ const DIETS_COL2 = [
     checked: false,
     value: "low-fat",
     title: "Low-Fat",
+    type: "diet"
   },
   {
     checked: false,
     value: "low-sodium",
     title: "Low-Sodium",
+    type: "diet"
   },
   {
     checked: false,
     value: "low-sugar",
     title: "Low-Sugar",
+    type: "health"
   },
   {
     checked: false,
     value: "alcohol-free",
     title: "Alcohol-Free",
+    type: "health"
   },
   {
     checked: false,
     value: "Balanced",
     title: "Balanced",
+    type: "health"
   },
   {
     checked: false,
     value: "inmunity",
     title: "Inmunity",
+    type: "health"
   },
 ];
 const ALLERGIES_COL1 = [
@@ -70,26 +82,31 @@ const ALLERGIES_COL1 = [
     checked: false,
     value: "gluten-free",
     title: "Gluten",
+    type: "health"
   },
   {
     checked: false,
     value: "dairy",
     title: "Dairy",
+    type: "health"
   },
   {
     checked: false,
     value: "eggs-free",
     title: "Eggs",
+    type: "health"
   },
   {
     checked: false,
     value: "soy-free",
     title: "Soy",
+    type: "health"
   },
   {
     checked: false,
     value: "wheat-free",
     title: "Wheat",
+    type: "health"
   },
 ];
 const ALLERGIES_COL2 = [
@@ -97,29 +114,33 @@ const ALLERGIES_COL2 = [
     checked: false,
     value: "fish-free",
     title: "Fish",
+    type: "health"
   },
   {
     checked: false,
     value: "shellfish-free",
     title: "Shellfish",
+    type: "health"
   },
   {
     checked: false,
     value: "tree-nut-free",
     title: "Tree Nuts",
+    type: "health"
   },
   {
     checked: false,
     value: "peanut-free",
     title: "Peanuts",
+    type: "health"
   },
 ];
 
 export default function Filter({ onSearchAction }) {
-  const params = useRef(null);
+  const params = useRef('&q=');
   const inputRef = createRef();
 
-  const onSearchChange = (e) => (params.current = { q: e });
+  const onSearchChange = (e) => (params.current = `&q=${e}`);
 
   const onClickHandler = () => sendParams();
 
@@ -129,16 +150,13 @@ export default function Filter({ onSearchAction }) {
   };
 
   const sendParams = () => {
-    const diet = [...DIETS_COL1, ...DIETS_COL2];
-    const health = [...ALLERGIES_COL1, ...ALLERGIES_COL2];
-    diet.map((d) => {
+    const list = [...DIETS_COL1, ...DIETS_COL2, ...ALLERGIES_COL1, ...ALLERGIES_COL2];
+
+    list.map((d) => {
       if (d.checked) {
-        params.current = {diet: d.value} 
-        console.log(d.value, params)
+        params.current += `&${d.type}=${d.value}` 
       }
     });
-    console.log(diet, health);
-    console.log(params.current)
     onSearchAction(params.current);
   };
 
