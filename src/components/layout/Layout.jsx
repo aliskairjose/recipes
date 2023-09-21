@@ -1,15 +1,15 @@
 import React from 'react'
 import Filter from '../Filter'
+import { Outlet } from "react-router-dom";
+import { Sidebar} from '../Sidebar'
 
 export default function Layout() {
   return (
     <div className="h-full">
       <div className="flex">
-      <nav className="flex-shrink w-[280px] bg-black ">
-        <Filter />
-      </nav>
+        <Sidebar />
       <main className="flex-grow bg-red-600">
-        f
+        <Outlet />
       </main>
       </div>
     </div>
