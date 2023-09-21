@@ -31,22 +31,14 @@ export default function Meals() {
   };
 
   return (
-    <div className="grid grid-flow-row h-screen">
-      <div className="flex divide-x pt-8">
-        <nav className="flex-shrink w-[280px] px-4 ">
-          <Filter onSearchAction={onSearch} />
-        </nav>
-        <main className="flex flex-wrap w-[calc(100%-280px)] gap-2 px-3">
-          {isLoading ? (
-            <Spinner />
-          ) : (
-            data?.hits.map((item, index) => (
-              <MealCard meal={item.recipe} key={index} />
-            ))
-          )}
-        </main>
-      </div>
-      <Footer />
+    <div className="flex flex-wrap w-[calc(100%-280px)] gap-2">
+      {isLoading ? (
+        <Spinner />
+      ) : (
+        data?.hits.map((item, index) => (
+          <MealCard meal={item.recipe} key={index} />
+        ))
+      )}
     </div>
   );
 }
