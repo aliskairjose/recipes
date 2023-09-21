@@ -9,7 +9,8 @@ const baseUrl = '/recipes'
 const router = createBrowserRouter([
   {
     path: baseUrl,
-    element: <Home />
+    // element: <Home />
+    element: <Meals />
   },
   {
     path:  `${baseUrl}/cocktails`,

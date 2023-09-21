@@ -6,37 +6,37 @@ const DIETS_COL1 = [
     checked: false,
     value: "vegetarian",
     title: "Vegetarian",
-    type: "health"
+    type: "health",
   },
   {
     checked: false,
     value: "vegan",
     title: "Vegan",
-    type: "health"
+    type: "health",
   },
   {
     checked: false,
     value: "paleo",
     title: "Paleo",
-    type: "health"
+    type: "health",
   },
   {
     checked: false,
     value: "high-fiber",
     title: "High-Fiber",
-    type: "diet"
+    type: "diet",
   },
   {
     checked: false,
     value: "high-protein",
     title: "High-Protein",
-    type: "diet"
+    type: "diet",
   },
   {
     checked: false,
     value: "low-carb",
     title: "Low-Carb",
-    type: "diet"
+    type: "diet",
   },
 ];
 const DIETS_COL2 = [
@@ -44,37 +44,37 @@ const DIETS_COL2 = [
     checked: false,
     value: "low-fat",
     title: "Low-Fat",
-    type: "diet"
+    type: "diet",
   },
   {
     checked: false,
     value: "low-sodium",
     title: "Low-Sodium",
-    type: "diet"
+    type: "diet",
   },
   {
     checked: false,
     value: "low-sugar",
     title: "Low-Sugar",
-    type: "health"
+    type: "health",
   },
   {
     checked: false,
     value: "alcohol-free",
     title: "Alcohol-Free",
-    type: "health"
+    type: "health",
   },
   {
     checked: false,
     value: "Balanced",
     title: "Balanced",
-    type: "health"
+    type: "health",
   },
   {
     checked: false,
     value: "inmunity",
     title: "Inmunity",
-    type: "health"
+    type: "health",
   },
 ];
 const ALLERGIES_COL1 = [
@@ -82,31 +82,31 @@ const ALLERGIES_COL1 = [
     checked: false,
     value: "gluten-free",
     title: "Gluten",
-    type: "health"
+    type: "health",
   },
   {
     checked: false,
     value: "dairy",
     title: "Dairy",
-    type: "health"
+    type: "health",
   },
   {
     checked: false,
     value: "eggs-free",
     title: "Eggs",
-    type: "health"
+    type: "health",
   },
   {
     checked: false,
     value: "soy-free",
     title: "Soy",
-    type: "health"
+    type: "health",
   },
   {
     checked: false,
     value: "wheat-free",
     title: "Wheat",
-    type: "health"
+    type: "health",
   },
 ];
 const ALLERGIES_COL2 = [
@@ -114,33 +114,33 @@ const ALLERGIES_COL2 = [
     checked: false,
     value: "fish-free",
     title: "Fish",
-    type: "health"
+    type: "health",
   },
   {
     checked: false,
     value: "shellfish-free",
     title: "Shellfish",
-    type: "health"
+    type: "health",
   },
   {
     checked: false,
     value: "tree-nut-free",
     title: "Tree Nuts",
-    type: "health"
+    type: "health",
   },
   {
     checked: false,
     value: "peanut-free",
     title: "Peanuts",
-    type: "health"
+    type: "health",
   },
 ];
 
 export default function Filter({ onSearchAction }) {
-  const params = useRef('&q=');
+  const params = useRef("&q=");
   const inputRef = createRef();
 
-  const onSearchChange = (e) => (params.current = `&q=${e}`);
+  const onSearchChange = ({target}) => (params.current = `&q=${target.value}`);
 
   const onClickHandler = () => sendParams();
 
@@ -150,14 +150,16 @@ export default function Filter({ onSearchAction }) {
   };
 
   const sendParams = () => {
-    const list = [...DIETS_COL1, ...DIETS_COL2, ...ALLERGIES_COL1, ...ALLERGIES_COL2];
+    const list = [
+      ...DIETS_COL1,
+      ...DIETS_COL2,
+      ...ALLERGIES_COL1,
+      ...ALLERGIES_COL2,
+    ];
+    let slugs = "";
+    list.map((d) =>  d.checked && (slugs += `&${d.type}=${d.value}`));
 
-    list.map((d) => {
-      if (d.checked) {
-        params.current += `&${d.type}=${d.value}` 
-      }
-    });
-    onSearchAction(params.current);
+    onSearchAction(`${params.current}${slugs}`);
   };
 
   const checkboxHandle = ({ target }) => {
@@ -205,7 +207,7 @@ export default function Filter({ onSearchAction }) {
           type="search"
           placeholder="Buscar receta..."
           ref={inputRef}
-          onChange={(event) => onSearchChange(event.target.value)}
+          onChange={onSearchChange}
         />
         <button
           className="bg-blue-500 hover:bg-blue-700 text-white py-2 px-4 mt-4 rounded focus:outline-none focus:shadow-outline w-1/2"
@@ -222,7 +224,7 @@ export default function Filter({ onSearchAction }) {
       </div>
 
       <span className="text-sm block font-medium">Diet</span>
-      <div className="grid grid-cols-2 mb-4 mt-2">
+      <div className="grid xl:grid-cols-2 grid-cols-1 mb-4 mt-2">
         <div>
           <ul>
             <li>
@@ -264,7 +266,7 @@ export default function Filter({ onSearchAction }) {
       </div>
 
       <span className="text-sm font-medium">Allergies</span>
-      <div className="grid grid-cols-2 mb-4 mt-2">
+      <div className="grid xl:grid-cols-2 grid-cols-1 mb-4 mt-2">
         <div>
           <ul>
             <li>
