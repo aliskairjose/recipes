@@ -6,11 +6,16 @@ import Filter from "../components/Filter";
 import Footer from "../components/Footer";
 
 export default function Meals() {
+  const isDesktop = () => document.body.clientWidth > 768;
   const [data, setData] = useState(null);
   const [query, setQuery] = useState("&q=");
   const [isLoading, setIsLoading] = useState(true);
+  const [sidebarStatus, setSidebarStatus] = useState("");
 
   useEffect(() => {
+    window.addEventListener("resize", () => {
+      setSidebarStatus(isDesktop());
+    });
     const getData = async () => {
       // const response = await recipes(query);
       const response = await recipesEdaman(query);
@@ -26,12 +31,12 @@ export default function Meals() {
   };
 
   return (
-    <div className="flex flex-col min-h-screen">
-      <div className="flex">
-        <nav className="flex-shrink w-[280px] px-4 py-8">
+    <div className="grid grid-flow-row h-screen">
+      <div className="flex divide-x pt-8">
+        <nav className="flex-shrink w-[280px] px-4 ">
           <Filter onSearchAction={onSearch} />
         </nav>
-        <main className="flex flex-wrap w-[calc(100%-280px)] gap-3 py-8">
+        <main className="flex flex-wrap w-[calc(100%-280px)] gap-2 px-3">
           {isLoading ? (
             <Spinner />
           ) : (
