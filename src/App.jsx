@@ -1,14 +1,12 @@
 import "./App.css";
 import Layout from "./components/layout/Layout";
-import { Outlet } from "react-router-dom";
+import Recipe from "./pages/Recipe";
 
 function App() {
   return (
-    <>
-      <Layout>
-        <p>hola</p>
-      </Layout>
-    </>
+    <Layout>
+      <Recipe />
+    </Layout>
   );
 }
 

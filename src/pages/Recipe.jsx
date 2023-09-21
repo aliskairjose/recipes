@@ -5,17 +5,13 @@ import MealCard from "../components/MealCard";
 import Filter from "../components/Filter";
 import Footer from "../components/Footer";
 
-export default function Meals() {
-  const isDesktop = () => document.body.clientWidth > 768;
+export default function Recipe() {
   const [data, setData] = useState(null);
-  const [query, setQuery] = useState("&q=");
+  const [query, setQuery] = useState("&q=salad");
   const [isLoading, setIsLoading] = useState(true);
-  const [sidebarStatus, setSidebarStatus] = useState("");
 
   useEffect(() => {
-    window.addEventListener("resize", () => {
-      setSidebarStatus(isDesktop());
-    });
+    
     const getData = async () => {
       // const response = await recipes(query);
       const response = await recipesEdaman(query);
@@ -31,7 +27,7 @@ export default function Meals() {
   };
 
   return (
-    <div className="flex flex-wrap w-[calc(100%-280px)] gap-2">
+    <div className="flex flex-wrap gap-2">
       {isLoading ? (
         <Spinner />
       ) : (

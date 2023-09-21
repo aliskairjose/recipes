@@ -135,7 +135,7 @@ const ALLERGIES_COL2 = [
     type: "health",
   },
 ];
-export default function Filter({ onSearchAction }) {
+export default function Filter() {
   const params = useRef("&q=");
   const inputRef = createRef();
 
@@ -158,7 +158,7 @@ export default function Filter({ onSearchAction }) {
     let slugs = "";
     list.map((d) =>  d.checked && (slugs += `&${d.type}=${d.value}`));
 
-    onSearchAction(`${params.current}${slugs}`);
+    console.log(`${params.current}${slugs}`)
   };
 
   const checkboxHandle = ({ target }) => {
