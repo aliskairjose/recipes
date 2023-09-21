@@ -135,7 +135,6 @@ const ALLERGIES_COL2 = [
     type: "health",
   },
 ];
-
 export default function Filter({ onSearchAction }) {
   const params = useRef("&q=");
   const inputRef = createRef();
