@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { recipes } from "../providers/meal";
+import { recipes, recipesEdaman } from "../providers/meal";
 import Spinner from "../components/Spinner";
 import MealCard from "../components/MealCard";
 import Filter from "../components/Filter";
@@ -12,7 +12,8 @@ export default function Meals() {
 
   useEffect(() => {
     const getData = async () => {
-      const response = await recipes(query);
+      // const response = await recipes(query);
+      const response = await recipesEdaman(query);
       setData(response);
       setIsLoading(false);
     };
@@ -23,7 +24,6 @@ export default function Meals() {
     setIsLoading(true);
     setQuery(params);
   };
-
 
   return (
     <>
