@@ -1,12 +1,15 @@
-import './App.css'
-import { BrowserRouter } from "react-router-dom";
+import "./App.css";
+import Layout from "./components/layout/Layout";
+import { Outlet } from "react-router-dom";
 
 function App() {
-
   return (
-    <BrowserRouter>
-    </BrowserRouter>
-  )
+    <>
+      <Layout>
+        <p>hola</p>
+      </Layout>
+    </>
+  );
 }
 
-export default App
+export default App;

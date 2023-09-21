@@ -1,17 +1,25 @@
 import React from 'react'
 import Filter from '../Filter'
-import { Outlet } from "react-router-dom";
-import { Sidebar} from '../Sidebar'
+import PropTypes from "prop-types";
+import Footer from '../Footer';
 
-export default function Layout() {
+export default function Layout({children}) {
   return (
-    <div className="h-full">
-      <div className="flex">
-        <Sidebar />
-      <main className="flex-grow bg-red-600">
-        <Outlet />
-      </main>
+    <div className="grid grid-flow-row h-screen">
+      <div className="flex divide-x pt-8">
+        <nav className="flex-shrink w-[280px] px-4 ">
+          {/* <Filter onSearchAction={onSearch} /> */}
+        </nav>
+        <main className="flex flex-wrap w-[calc(100%-280px)] gap-2 px-3">
+          {children}
+        </main>
       </div>
+      <Footer />
     </div>
   )
 }
+
+Layout.propTypes = {
+  children: PropTypes.any
+}
+
