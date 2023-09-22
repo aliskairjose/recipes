@@ -1,7 +1,7 @@
 import { createRef, useEffect, useRef, useState } from "react";
 import PropTypes from "prop-types";
 import { useDispatch } from "react-redux";
-import { addRecipes } from "../features/slices/paramsSlice";
+import { addRecipes } from "../features/slices/recipeSlice";
 import { isLoading } from "../features/slices/loadingSlice";
 import { recipesEdaman } from "../providers/meal";
 
