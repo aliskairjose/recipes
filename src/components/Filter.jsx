@@ -1,7 +1,8 @@
 import { createRef, useEffect, useRef, useState } from "react";
 import PropTypes from "prop-types";
 import { useDispatch } from "react-redux";
-import { addRecipes } from "../features/params/paramsSlice";
+import { addRecipes } from "../features/slices/paramsSlice";
+import { isLoading } from "../features/slices/loadingSlice";
 import { recipesEdaman } from "../providers/meal";
 
 const DIETS_COL1 = [
@@ -149,6 +150,7 @@ export default function Filter() {
     const getData = async () => {
       const response = await recipesEdaman(query);
       dispatch(addRecipes(response))
+      dispatch(isLoading(false))
     };
     getData().catch(console.error);
   }, [dispatch, query])
@@ -173,6 +175,7 @@ export default function Filter() {
     list.map((d) => d.checked && (slugs += `&${d.type}=${d.value}`));
 
     const url = `${params.current}${slugs}`;
+    dispatch(isLoading(true))
     setQuery(url)
   };
 

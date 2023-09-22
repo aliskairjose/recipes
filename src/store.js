@@ -1,9 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit'
-// import counterReducer from './features/counter/counterSlice'
-import paramsReducer from './features/params/paramsSlice'
+import paramsReducer from './features/slices/paramsSlice'
+import loadingSlice from './features/slices/loadingSlice'
 
 export default configureStore({
   reducer: {
-    recipe: paramsReducer
+    recipe: paramsReducer, 
+    loading: loadingSlice
   },
 })
