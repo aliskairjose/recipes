@@ -27,7 +27,7 @@ export default function Recipe() {
   };
 
   return (
-    <div className="flex flex-wrap gap-2">
+    <div className="flex flex-wrap gap-2 pt-6">
       {isLoading ? (
         <Spinner />
       ) : (

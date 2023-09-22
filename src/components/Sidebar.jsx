@@ -27,7 +27,7 @@ export default function Sidebar() {
       </button>
       <aside
         id="default-sidebar"
-        className="fixed top-0 left-0 z-20 lg:w-64 w-52 h-screen transition-transform -translate-x-full sm:translate-x-0 px-4 pt-8 border-r my-4"
+        className="fixed top-0 left-0 z-20 lg:w-64 w-52 h-screen transition-transform -translate-x-full sm:translate-x-0 px-4 pt-8 border-r"
         aria-label="Sidebar"
       >
         <Filter />

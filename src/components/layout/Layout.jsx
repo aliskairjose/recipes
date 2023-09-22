@@ -6,7 +6,7 @@ export default function Layout({ children }) {
   return (
     <>
       <Sidebar />
-      <main className="lg:ml-64 md:ml-52 sm:ml-64 min-h-screen p-3 mb-[90px]">
+      <main className="lg:ml-64 md:ml-52 sm:ml-64 min-h-screen p-3 mb-20">
         {children}
       </main>
       <Footer />
