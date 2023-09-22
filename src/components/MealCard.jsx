@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 
 export default function MealCard({ meal }) {
   return (
-    <div className="h-[24.5rem] lg:w-[18.5rem] w-80 rounded overflow-hidden shadow-md border border-gray-300 mx-auto">
+    <div className="h-[24.5rem] lg:w-[18.5rem] w-80 rounded overflow-hidden shadow-md border border-gray-300 lg:mx-0 mx-auto">
       <img className="p-2 h-72 w-full" src={meal.image} alt={meal.label} />
       <div className="px-2">
         <div className="text-sm h-10 overflow-hidden">{meal.label}</div>
