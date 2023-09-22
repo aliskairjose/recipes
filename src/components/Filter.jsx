@@ -1,5 +1,8 @@
-import { createRef, useRef } from "react";
+import { createRef, useEffect, useRef, useState } from "react";
 import PropTypes from "prop-types";
+import { useDispatch } from "react-redux";
+import { addRecipes } from "../features/params/paramsSlice";
+import { recipesEdaman } from "../providers/meal";
 
 const DIETS_COL1 = [
   {
@@ -136,19 +139,30 @@ const ALLERGIES_COL2 = [
   },
 ];
 export default function Filter() {
+  const dispatch = useDispatch();
+
   const params = useRef("&q=");
   const inputRef = createRef();
+  const [query, setQuery] = useState("&q=");
 
-  const onSearchChange = ({target}) => (params.current = `&q=${target.value}`);
+  useEffect(()=>{
+    const getData = async () => {
+      const response = await recipesEdaman(query);
+      dispatch(addRecipes(response))
+    };
+    getData().catch(console.error);
+  }, [dispatch, query])
 
-  const onClickHandler = () => sendParams();
+  const onSearchChange = ({ target }) => (params.current = `&q=${target.value}`);
+
+  const onClickHandler = () => formatParams();
 
   const handleOnSubmit = (e) => {
     e.preventDefault();
-    sendParams();
+    formatParams();
   };
 
-  const sendParams = () => {
+  const formatParams = () => {
     const list = [
       ...DIETS_COL1,
       ...DIETS_COL2,
@@ -156,9 +170,10 @@ export default function Filter() {
       ...ALLERGIES_COL2,
     ];
     let slugs = "";
-    list.map((d) =>  d.checked && (slugs += `&${d.type}=${d.value}`));
+    list.map((d) => d.checked && (slugs += `&${d.type}=${d.value}`));
 
-    console.log(`${params.current}${slugs}`)
+    const url = `${params.current}${slugs}`;
+    setQuery(url)
   };
 
   const checkboxHandle = ({ target }) => {
@@ -209,7 +224,7 @@ export default function Filter() {
           onChange={onSearchChange}
         />
         <button
-          className="bg-blue-500 hover:bg-blue-700 text-white py-2 px-4 mt-4 rounded focus:outline-none focus:shadow-outline w-1/2"
+          className="bg-blue-500 hover:bg-blue-700 text-white py-2 px-4 mt-4 rounded focus:outline-none focus:shadow-outline w-1/2 shadow-md"
           type="button"
           onClick={onClickHandler}
         >
@@ -222,7 +237,7 @@ export default function Filter() {
         </span>
       </div>
 
-      <span className="text-sm block font-medium">Diet</span>
+      <span className="text-sm block">Diet</span>
       <div className="grid xl:grid-cols-2 grid-cols-1 mb-4 mt-2">
         <div>
           <ul>
@@ -256,7 +271,9 @@ export default function Filter() {
                     className=" text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
                     onChange={checkboxHandle}
                   />
-                  <label className="ml-2 text-sm text-gray-500 font-medium">{item.title}</label>
+                  <label className="ml-2 text-sm text-gray-500 font-medium">
+                    {item.title}
+                  </label>
                 </div>
               ))}
             </li>
@@ -266,7 +283,7 @@ export default function Filter() {
 
       <div className="border my-4"></div>
 
-      <span className="text-sm font-medium">Allergies</span>
+      <span className="text-sm">Allergies</span>
       <div className="grid xl:grid-cols-2 grid-cols-1 mb-4 mt-2">
         <div>
           <ul>
@@ -300,7 +317,9 @@ export default function Filter() {
                     className=" text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
                     onChange={checkboxHandle}
                   />
-                  <label className="ml-2 text-sm text-gray-500 font-medium">{item.title}</label>
+                  <label className="ml-2 text-sm text-gray-500 font-medium">
+                    {item.title}
+                  </label>
                 </div>
               ))}
             </li>
