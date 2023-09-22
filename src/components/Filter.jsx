@@ -147,6 +147,7 @@ export default function Filter() {
   const [query, setQuery] = useState("&q=");
 
   useEffect(()=>{
+    console.log('useEffect', params)
     const getData = async () => {
       const response = await recipesEdaman(query);
       dispatch(addRecipes(response))
@@ -175,6 +176,7 @@ export default function Filter() {
     list.map((d) => d.checked && (slugs += `&${d.type}=${d.value}`));
 
     const url = `${params.current}${slugs}`;
+    params.current = query;
     dispatch(isLoading(true))
     setQuery(url)
   };

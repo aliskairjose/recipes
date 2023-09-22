@@ -16,17 +16,17 @@ export default function RecipeDetail() {
   }, []);
 
   return (
-    <div className="grid grid-rows-2 w-8/12 content-center mx-auto divide-y border shadow-md m-8">
-      <div className="flex">
-        <div className="p-4">
+    <div className="grid grid-rows-2 xl:w-8/12 w-11/12 content-center mx-auto divide-y border shadow-md m-8">
+      <div className="flex md:flex-row flex-col">
+        <div className="md:w-1/2 w-full xl:p-6 p-2">
           <img
             className=" rounded shadow-md h-96 w-auto border border-sky-400"
             src={recipe.image}
             alt={recipe.label}
           />
         </div>
-        <div className="w-1/2 p-6">
-          <h1 className="text-3xl text-center mb-3">{recipe.label}</h1>
+        <div className="md:w-1/2 w-full xl:p-6 p-4">
+          <h1 className="lg:text-3xl text-2xl text-center mb-3">{recipe.label}</h1>
           <a
             href={recipe.url}
             target="_blank"
@@ -38,7 +38,7 @@ export default function RecipeDetail() {
           </a>
           <div className="w-full grid gap-y-1 mt-4">
             <p>
-              <div className="h-2 rounded-full bg-yellow-400 w-2 inline-block mr-1"></div>
+              <span className="h-2 rounded-full bg-yellow-400 w-2 inline-block mr-1"></span>
               <span className="text-gray-700 font-semibold">Meal type:</span>
               {recipe.mealType?.map((dish, i) => (
                 <span key={i} className="mx-1 capitalize">
@@ -47,7 +47,7 @@ export default function RecipeDetail() {
               ))}
             </p>
             <p>
-              <div className="h-2 rounded-full bg-sky-400 w-2 inline-block mr-1"></div>
+              <span className="h-2 rounded-full bg-sky-400 w-2 inline-block mr-1"></span>
               <span className="text-gray-700 font-semibold">Dish type:</span>
               {recipe.dishType?.map((dish, i) => (
                 <span key={i} className="mx-1 capitalize">
@@ -56,7 +56,7 @@ export default function RecipeDetail() {
               ))}
             </p>
             <p>
-              <div className="h-2 rounded-full bg-green-400 w-2 inline-block mr-1"></div>
+              <span className="h-2 rounded-full bg-green-400 w-2 inline-block mr-1"></span>
               <span className="text-gray-700 font-semibold">Cuisine type:</span>
               {recipe.cuisineType?.map((dish, i) => (
                 <span key={i} className="mx-1 capitalize">
@@ -67,8 +67,8 @@ export default function RecipeDetail() {
           </div>
         </div>
       </div>
-      <div className="flex pt-2">
-        <div className="w-1/2 px-8 py-4">
+      <div className="flex md:flex-row flex-col pt-2">
+        <div className="md:w-1/2 w-full xl:px-8 p-4">
           <h1 className="text-lg text-gray-500 font-semibold tracking-wider border-b pb-2 mb-6">
             {recipe.ingredients?.length} Ingredients
           </h1>
@@ -83,7 +83,7 @@ export default function RecipeDetail() {
             Preparation
           </h1>
         </div>
-        <div className="w-1/2 px-8 py-4">
+        <div className="md:w-1/2 w-full xl:px-8 p-4">
           <h1 className="text-lg text-gray-500 font-semibold tracking-wider border-b pb-2">
             Nutrition
           </h1>
