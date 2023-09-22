@@ -1,14 +1,32 @@
+import { useState } from "react";
 import { useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
+import { recipeEdaman } from "../providers/meal";
+import { useEffect } from "react";
 
 export default function RecipeDetail() {
   const recipe = useSelector((state) => state.recipe.recipe);
+  const { id } = useParams();
+  const [data, setData] = useState(null);
+
+  useEffect(()=>{
+    const getRecipe = async ()=>{
+      const response = await recipeEdaman(id)
+      // setData(response)
+    }
+
+    getRecipe().catch(console.error);
+
+  }, [data])
+  
+  Object.entries(recipe).length === 0 && console.log(id);
 
   return (
     <div className="grid grid-rows-2 w-8/12 content-center mx-auto">
       <div className="flex">
         <div className="p-4">
           <img
-            className="p-2 h-96 w-auto"
+            className=" rounded shadow-md h-96 w-auto border border-sky-400"
             src={recipe.image}
             alt={recipe.label}
           />

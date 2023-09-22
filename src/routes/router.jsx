@@ -11,7 +11,7 @@ const router = createBrowserRouter([
     element: <App />
   },
   {
-    path: `${baseUrl}/detail`,
+    path: `${baseUrl}/detail/:id`,
     element: <RecipeDetail />
   },
   {

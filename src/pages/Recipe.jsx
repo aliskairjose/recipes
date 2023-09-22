@@ -1,6 +1,6 @@
-import MealCard from "../components/MealCard";
 import { useSelector } from "react-redux";
 import Spinner from "../components/Spinner";
+import RecipeCard from "../components/RecipeCard";
 
 export default function Recipe() {
   const recipes = useSelector((state) => state.recipe.recipes);
@@ -13,7 +13,7 @@ export default function Recipe() {
         <Spinner />
       ) : (
         recipes.hits?.map((item, index) => (
-          <MealCard meal={item.recipe} key={index} />
+          <RecipeCard recipe={item.recipe} key={index} />
         ))
       )}
     </div>

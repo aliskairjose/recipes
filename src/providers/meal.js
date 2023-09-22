@@ -27,3 +27,10 @@ export const recipesEdaman = async (params) => {
     .then((response) => response.data)
     .catch(console.error);
 };
+
+export const recipeEdaman = async (uri) => {
+  return await instanceV2
+    .get(`v2/${uri}${slugV2}`)
+    .then((response) => response.data)
+    .catch(console.error);
+};
