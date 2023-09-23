@@ -1,11 +1,11 @@
 import "./App.css";
 import Layout from "./components/layout/Layout";
-import Recipe from "./pages/Recipe";
+import { Outlet } from "react-router-dom";
 
 function App() {
   return (
     <Layout>
-      <Recipe />
+      <Outlet />
     </Layout>
   );
 }

@@ -147,7 +147,6 @@ export default function Filter() {
   const [query, setQuery] = useState("&q=");
 
   useEffect(()=>{
-    console.log('useEffect', params)
     const getData = async () => {
       const response = await recipesEdaman(query);
       dispatch(addRecipes(response))
