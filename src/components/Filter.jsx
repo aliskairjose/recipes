@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { useDispatch } from "react-redux";
 import { addRecipes } from "../features/slices/recipeSlice";
 import { isLoading } from "../features/slices/loadingSlice";
-import { recipesEdaman } from "../providers/meal";
+import { recipes, recipesEdaman } from "../providers/meal";
 
 const DIETS_COL1 = [
   {
@@ -142,20 +142,20 @@ const ALLERGIES_COL2 = [
 export default function Filter() {
   const dispatch = useDispatch();
 
-  const params = useRef("&q=");
+  const queryParams = useRef({q:''});
   const inputRef = createRef();
-  const [query, setQuery] = useState("&q=");
+  const [query, setQuery] = useState({slugs:'', params: {q:''}});
 
   useEffect(()=>{
     const getData = async () => {
-      const response = await recipesEdaman(query);
+      const response = await recipes(query);
       dispatch(addRecipes(response))
       dispatch(isLoading(false))
     };
     getData().catch(console.error);
   }, [dispatch, query])
 
-  const onSearchChange = ({ target }) => (params.current = `&q=${target.value}`);
+  const onSearchChange = ({ target }) => (queryParams.current = {q: target.value});
 
   const onClickHandler = () => formatParams();
 
@@ -173,11 +173,9 @@ export default function Filter() {
     ];
     let slugs = "";
     list.map((d) => d.checked && (slugs += `&${d.type}=${d.value}`));
-
-    const url = `${params.current}${slugs}`;
-    params.current = query;
+    console.log(slugs)
     dispatch(isLoading(true))
-    setQuery(url)
+    setQuery({slugs, params: queryParams.current})
   };
 
   const checkboxHandle = ({ target }) => {
