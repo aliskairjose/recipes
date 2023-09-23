@@ -20,7 +20,7 @@ export default function RecipeDetail() {
       <div className="flex md:flex-row flex-col">
         <div className="md:w-1/2 w-full xl:py-6 xl:px-4 p-2">
           <img
-            className="mx-auto rounded shadow-md h-96 w-auto border border-sky-400"
+            className="mx-auto rounded-md shadow-md h-96 w-auto border border-sky-400"
             src={recipe.image}
             alt={recipe.label}
           />
