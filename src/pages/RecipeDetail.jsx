@@ -16,16 +16,16 @@ export default function RecipeDetail() {
   }, []);
 
   return (
-    <div className="grid grid-rows-2 xl:w-8/12 w-11/12 content-center mx-auto divide-y border shadow-md m-8">
-      <div className="flex md:flex-row flex-col">
-        <div className="md:w-1/2 w-full xl:py-6 xl:px-4 p-2">
+    <div className="flex flex-col xl:w-8/12 w-11/12 content-center mx-auto md:my-8 my-6 divide-y border shadow-md ">
+      <div className="flex md:flex-row flex-col md:mb-0 mb-4">
+        <div className=" xl:py-6 xl:px-4 p-2">
           <img
-            className="mx-auto rounded-md shadow-md h-96 w-auto border border-sky-400"
+            className="mx-auto rounded-md shadow-md md:w-auto w-full border border-sky-400"
             src={recipe.image}
             alt={recipe.label}
           />
         </div>
-        <div className="md:w-1/2 w-full xl:py-6 xl:px-4 p-4">
+        <div className="xl:py-6 xl:px-4 p-4">
           <h1 className="lg:text-3xl text-2xl text-center mb-3 tracking-wide">{recipe.label}</h1>
           <a
             href={recipe.url}
@@ -34,7 +34,7 @@ export default function RecipeDetail() {
             className="text-center m-0 block text-sm"
           >
             {"See full recipe on:"}
-            <span className="underline">{recipe.source}</span>
+            <span className="underline ms-1">{recipe.source}</span>
           </a>
           <div className="w-full grid gap-y-1 mt-4">
             <p>
@@ -72,14 +72,10 @@ export default function RecipeDetail() {
           <h1 className="text-lg text-gray-500 font-semibold tracking-wider border-b pb-2 mb-6">
             {recipe.ingredients?.length} Ingredients
           </h1>
-          <ul className="list-outside mb-6">
-            {recipe.ingredientLines?.map((item, index) => (
-              <li className="" key={index}>
-                {item}
-              </li>
-            ))}
+          <ul className="list-outside space-y-2 capitalize">
+            {recipe.ingredientLines?.map((item, index) => <li key={index}>{item}</li>)}
           </ul>
-          <h1 className="text-lg text-gray-500 font-semibold tracking-wider border-b pb-2 mb-6">
+          <h1 className="text-lg text-gray-500 font-semibold tracking-wider border-b pb-2 my-6">
             Preparation
           </h1>
         </div>
