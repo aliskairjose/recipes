@@ -144,7 +144,7 @@ export default function Filter() {
 
   const queryParams = useRef({q:''});
   const inputRef = createRef();
-  const [query, setQuery] = useState({slugs:'', params: {q:''}});
+  const [query, setQuery] = useState(null);
 
   useEffect(()=>{
     const getData = async () => {

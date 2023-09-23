@@ -4,7 +4,7 @@ import RecipeCard from "../components/RecipeCard";
 import { useEffect, useRef } from "react";
 
 export default function Recipe() {
-  const recipes =  useRef(null)
+  // const recipes =  useRef(null)
   const _recipes = useSelector((state) => state.recipe.recipes);
   const isLoading = useSelector(state => state.loading.isLoading)
 

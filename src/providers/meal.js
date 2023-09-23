@@ -7,7 +7,7 @@ const instanceV1 = axios.create({
   baseURL: "https://api.edamam.com/",
   params: {
     app_key: appKEY,
-    app_id: appID
+    app_id: appID,
   },
 });
 
