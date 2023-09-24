@@ -24,13 +24,16 @@ export default function Recipe() {
     // fetchData();
   };
 
+  useEffect(()=>{
+  },[_recipes])
+
   return (
     <div className="flex flex-wrap gap-2 pt-6">
       {isLoading}
       {isLoading ? (
         <Spinner />
       ) : (
-        recipes.hits?.map((item, index) => (
+        _recipes?.hits?.map((item, index) => (
           <RecipeCard recipe={item.recipe} key={index} />
         ))
       )}
