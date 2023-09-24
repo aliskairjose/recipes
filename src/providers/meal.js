@@ -6,22 +6,26 @@ const appKEY = import.meta.env.VITE_API_KEY;
 const instanceV1 = axios.create({
   baseURL: "https://api.edamam.com/",
   params: {
-    app_key: appKEY,
     app_id: appID,
-  },
+    app_key: appKEY
+  }
 });
 
 const instanceV2 = axios.create({
   baseURL: "https://www.edamam.com/api/recipes/",
+  params:{
+    type: 'public'
+  }
 });
 
+const slugV1 = `?app_key=${appKEY}&app_id=${appID}`;
 const slugV2 = `?type=public`;
 
 // PUBLIC KEY
 export const recipes = async (data) => {
-  const { slugs, params } = data;
+  const {slug, params}= data
   return await instanceV1
-    .get(`search${slugs}`, { params })
+    .get(`search${slug}`, { params })
     .then((response) => response.data)
     .catch(console.error);
 };
@@ -35,9 +39,10 @@ export const recipeById = async (uri) => {
 
 // EDEMAN
 
-export const recipesEdaman = async (params) => {
+export const recipesEdaman = async (data) => {
+  const {slug, params} = data
   return await instanceV2
-    .get(`v2${slugV2}${params}`)
+    .get(`v2${slug}`, {params})
     .then((response) => response.data)
     .catch(console.error);
 };

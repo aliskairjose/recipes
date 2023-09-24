@@ -142,13 +142,14 @@ const ALLERGIES_COL2 = [
 export default function Filter() {
   const dispatch = useDispatch();
 
-  const queryParams = useRef({q:''});
+  const queryParams = useRef(null);
   const inputRef = createRef();
   const [query, setQuery] = useState(null);
 
   useEffect(()=>{
+    if (!query) { return }
     const getData = async () => {
-      const response = await recipes(query);
+      const response = await recipesEdaman(query);
       dispatch(addRecipes(response))
       dispatch(isLoading(false))
     };
@@ -171,11 +172,11 @@ export default function Filter() {
       ...ALLERGIES_COL1,
       ...ALLERGIES_COL2,
     ];
-    let slugs = "";
-    list.map((d) => d.checked && (slugs += `&${d.type}=${d.value}`));
-    console.log(slugs)
+    let slug = "";
+    list.map((d) => d.checked && (slug += `?${d.type}=${d.value}`));
+    
     dispatch(isLoading(true))
-    setQuery({slugs, params: queryParams.current})
+    setQuery({slug, params: queryParams.current})
   };
 
   const checkboxHandle = ({ target }) => {
