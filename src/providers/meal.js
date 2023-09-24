@@ -18,9 +18,6 @@ const instanceV2 = axios.create({
   }
 });
 
-const slugV1 = `?app_key=${appKEY}&app_id=${appID}`;
-const slugV2 = `?type=public`;
-
 // PUBLIC KEY
 export const recipes = async (data) => {
   const {slug, params}= data
@@ -49,7 +46,7 @@ export const recipesEdaman = async (data) => {
 
 export const recipeEdaman = async (uri) => {
   return await instanceV2
-    .get(`v2/${uri}${slugV2}`)
+    .get(`v2/${uri}`)
     .then((response) => response.data)
     .catch(console.error);
 };
