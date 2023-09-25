@@ -76,7 +76,7 @@ const DIETS_COL2 = [
   },
   {
     checked: false,
-    value: "inmunity",
+    value: "immuno-supportive",
     title: "Inmunity",
     type: "health",
   },
@@ -156,10 +156,15 @@ export default function Filter() {
         dispatch(isLoading(true));
         query.params = { ...query.params, ...paramSelector };
       }
-      const response = await recipes(query);
-      hitsRef.current = [...hitsRef.current, ...response.hits];
-      dispatch(addRecipes({ ...response, hits: hitsRef.current }));
-      dispatch(isLoading(false));
+      try {
+        const response = await recipes(query);
+        hitsRef.current = [...hitsRef.current, ...response.hits];
+        dispatch(addRecipes({ ...response, hits: hitsRef.current }));
+        dispatch(isLoading(false));
+      } catch (error) {
+        dispatch(isLoading(false));
+        console.log(error)
+      }
     };
     getData().catch(console.error);
   }, [dispatch, query, paramSelector]);

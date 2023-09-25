@@ -31,7 +31,10 @@ export const recipeById = async (uri) => {
   return await instanceV1
     .get(`v1/${uri}`)
     .then((response) => response.data)
-    .catch(console.error);
+    .catch(e=>{
+      console.error(e)
+      return e.response.data
+    });
 };
 
 // EDEMAN
