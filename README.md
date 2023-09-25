@@ -6,6 +6,10 @@ Se usa **Edaman** como api de recetas, la cual requiere de ***appKey*** y ***app
 
 Se implementa redux con **react redux** y **redux toolkit** para la comunicacion entre componentes de la response del api y el estado del loading, aunque no es estrcitamente necesario su uso, se implementa por práctica de redux.
 
+Se implementa gh-pages para el despliegue del sitio en Github Pages
+
+## Site
+Este desarrollo esta alojado en GitHub Pages en la direccion https://aliskairjose.github.io/recipes/
 
 ## Dependencias
 
@@ -16,6 +20,7 @@ Se implementa redux con **react redux** y **redux toolkit** para la comunicacion
 - [Tailwind CSS](https://tailwindcss.com/)
 - [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
 - [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- [gh-page](https://www.npmjs.com/package/gh-pages) GH-Pages para desplegar el sitio en GitHub Pages
 
 ## Compatibility Note
 
