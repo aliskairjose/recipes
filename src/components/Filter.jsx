@@ -2,6 +2,7 @@ import { createRef, useEffect, useRef, useState } from "react";
 import PropTypes from "prop-types";
 import { useDispatch, useSelector } from "react-redux";
 import { addRecipes } from "../features/slices/recipeSlice";
+import { addResponseError } from "../features/slices/errorSlice";
 import { isLoading } from "../features/slices/loadingSlice";
 import { recipes, recipesEdaman } from "../providers/meal";
 
@@ -156,18 +157,16 @@ export default function Filter() {
         dispatch(isLoading(true));
         query.params = { ...query.params, ...paramSelector };
       }
-      try {
-        const response = await recipes(query);
-        hitsRef.current = [...hitsRef.current, ...response.hits];
-        dispatch(addRecipes({ ...response, hits: hitsRef.current }));
-        dispatch(isLoading(false));
-      } catch (error) {
-        dispatch(isLoading(false));
-        console.log(error)
-      }
+      const response = await recipes(query);
+
+      dispatch(isLoading(false));
+      dispatch(addResponseError(Boolean(response.status)));
+
+      hitsRef.current = [...hitsRef.current, ...response.hits];
+      dispatch(addRecipes({ ...response, hits: hitsRef.current }));
     };
     getData().catch(console.error);
-  }, [dispatch, query, paramSelector]);
+  }, [query, paramSelector]);
 
   const onSearchChange = ({ target }) =>
     (queryParams.current = { q: target.value });

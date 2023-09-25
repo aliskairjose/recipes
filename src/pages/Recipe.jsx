@@ -7,12 +7,13 @@ import { addParams } from "../features/slices/recipeSlice";
 export default function Recipe() {
   const recipes = useSelector((state) => state.recipe.recipes);
   const isLoading = useSelector((state) => state.loading.isLoading);
+  const isError =  useSelector(state => state.error.isError)
   const dispatch = useDispatch();
 
   useEffect(() => {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [recipes]);
+  }, [recipes, isError]);
 
   const handleScroll = () => {
     if (
@@ -22,8 +23,9 @@ export default function Recipe() {
     ) {
       return;
     }
+
     const {more, from, to} = recipes;
-    (more) && fetchData({from, to});
+    (more && !isError) && fetchData({from, to});
   };
 
   const fetchData = ({from, to}) => {
