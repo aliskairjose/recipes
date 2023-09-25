@@ -1,14 +1,19 @@
+import { useState } from "react";
 import Filter from "./Filter";
 
 export default function Sidebar() {
+  const [isOpen, setIsOpen] = useState(false);
+
   return (
     <>
       <button
         data-drawer-target="default-sidebar"
         data-drawer-toggle="default-sidebar"
+        data-drawer-show="default-sidebar"
         aria-controls="default-sidebar"
         type="button"
         className="inline-flex items-center p-2 mt-2 ml-3 text-sm text-gray-500 rounded-lg sm:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+        onClick={() => setIsOpen(!isOpen)}
       >
         <span className="sr-only">Open sidebar</span>
         <svg
@@ -27,7 +32,10 @@ export default function Sidebar() {
       </button>
       <aside
         id="default-sidebar"
-        className="fixed top-0 left-0 z-20 lg:w-64 w-52 h-screen transition-transform -translate-x-full sm:translate-x-0 px-4 pt-8 border-r"
+        className={`
+        fixed md:top-0 left-0 z-20 lg:w-64 md:w-52 w-80 h-screen transition-transform sm:translate-x-0 px-4 pt-8 border-r bg-white
+        ${isOpen ? "" : "-translate-x-full"}
+        `}
         aria-label="Sidebar"
       >
         <Filter />
