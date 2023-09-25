@@ -1,6 +1,6 @@
 import { createRef, useEffect, useRef, useState } from "react";
 import PropTypes from "prop-types";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addRecipes } from "../features/slices/recipeSlice";
 import { isLoading } from "../features/slices/loadingSlice";
 import { recipes, recipesEdaman } from "../providers/meal";
@@ -141,22 +141,31 @@ const ALLERGIES_COL2 = [
 ];
 export default function Filter() {
   const dispatch = useDispatch();
-
+  const paramSelector = useSelector((state) => state.recipe.params);
   const queryParams = useRef(null);
-  const inputRef = createRef();
   const [query, setQuery] = useState(null);
+  const inputRef = createRef();
+  const hitsRef = useRef([]);
 
-  useEffect(()=>{
-    if (!query) { return }
+  useEffect(() => {
+    if (!query) {
+      return;
+    }
     const getData = async () => {
-      const response = await recipesEdaman(query);
-      dispatch(addRecipes(response))
-      dispatch(isLoading(false))
+      if (Object.entries(paramSelector).length > 0) {
+        dispatch(isLoading(true));
+        query.params = { ...query.params, ...paramSelector };
+      }
+      const response = await recipes(query);
+      hitsRef.current = [...hitsRef.current, ...response.hits];
+      dispatch(addRecipes({ ...response, hits: hitsRef.current }));
+      dispatch(isLoading(false));
     };
     getData().catch(console.error);
-  }, [dispatch, query])
+  }, [dispatch, query, paramSelector]);
 
-  const onSearchChange = ({ target }) => (queryParams.current = {q: target.value});
+  const onSearchChange = ({ target }) =>
+    (queryParams.current = { q: target.value });
 
   const onClickHandler = () => formatParams();
 
@@ -166,6 +175,7 @@ export default function Filter() {
   };
 
   const formatParams = () => {
+    hitsRef.current = [];
     const list = [
       ...DIETS_COL1,
       ...DIETS_COL2,
@@ -174,9 +184,9 @@ export default function Filter() {
     ];
     let slug = "";
     list.map((d) => d.checked && (slug += `?${d.type}=${d.value}`));
-    
-    dispatch(isLoading(true))
-    setQuery({slug, params: queryParams.current})
+
+    dispatch(isLoading(true));
+    setQuery({ slug, params: queryParams.current });
   };
 
   const checkboxHandle = ({ target }) => {
