@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useParams } from "react-router-dom";
-import { recipeEdaman } from "../providers/meal";
+import { recipeEdaman } from "../providers/api";
 import { useEffect } from "react";
 
 export default function RecipeDetail() {
@@ -10,7 +10,7 @@ export default function RecipeDetail() {
   useEffect(() => {
     const getRecipe = async () => {
       const response = await recipeEdaman(id);
-      setRecipe(response.recipe);
+      setRecipe(response);
     };
     getRecipe().catch(console.error);
   }, []);
@@ -18,14 +18,14 @@ export default function RecipeDetail() {
   return (
     <div className="flex flex-col xl:w-8/12 w-11/12 content-center mx-auto md:my-8 my-6 divide-y border shadow-md ">
       <div className="flex md:flex-row flex-col md:mb-0 mb-4">
-        <div className=" xl:py-6 xl:px-4 p-2">
+        <div className="xl:py-6 xl:px-4 p-2 md:w-1/2 w-full">
           <img
             className="mx-auto rounded-md shadow-md md:w-auto w-full border border-sky-400"
             src={recipe.image}
             alt={recipe.label}
           />
         </div>
-        <div className="xl:py-6 xl:px-4 p-4">
+        <div className="xl:py-6 xl:px-4 p-4 md:w-1/2 w-full">
           <h1 className="lg:text-3xl text-2xl text-center mb-3 tracking-wide">{recipe.label}</h1>
           <a
             href={recipe.url}

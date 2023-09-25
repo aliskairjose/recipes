@@ -50,6 +50,6 @@ export const recipesEdaman = async (data) => {
 export const recipeEdaman = async (uri) => {
   return await instanceV2
     .get(`v2/${uri}`)
-    .then((response) => response.data)
+    .then((response) => response.data.recipe)
     .catch(console.error);
 };

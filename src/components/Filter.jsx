@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { addRecipes } from "../features/slices/recipeSlice";
 import { addResponseError } from "../features/slices/errorSlice";
 import { isLoading } from "../features/slices/loadingSlice";
-import { recipes, recipesEdaman } from "../providers/meal";
+import { recipes, recipesEdaman } from "../providers/api";
 
 const DIETS_COL1 = [
   {
