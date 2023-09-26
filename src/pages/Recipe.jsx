@@ -11,7 +11,10 @@ export default function Recipe() {
   const okRef = useRef(true);
   const dispatch = useDispatch();
 
-  okRef.current = recipes.ok
+
+  if(recipes.ok !== undefined){
+    okRef.current = recipes.ok
+  }
   
   useEffect(() => {
     window.addEventListener("scroll", handleScroll);
