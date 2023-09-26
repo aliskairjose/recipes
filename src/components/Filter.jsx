@@ -158,7 +158,7 @@ export default function Filter() {
         query.params = { ...query.params, ...paramSelector };
       }
       const response = await recipes(query);
-
+      console.log(response)
       dispatch(isLoading(false));
       dispatch(addResponseError(Boolean(response.status)));
 

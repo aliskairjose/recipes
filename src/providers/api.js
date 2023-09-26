@@ -23,7 +23,11 @@ export const recipes = async (data) => {
   const { slug, params } = data;
   return await instanceV1
     .get(`search${slug}`, { params })
-    .then((response) => response.data)
+    .then((response) => {
+      response.data.ok = response.data.hits.length>0
+      return response.data
+
+    })
     .catch((error) => {
       console.log(error.response);
       return error.response;

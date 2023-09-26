@@ -1,16 +1,20 @@
 import { useDispatch, useSelector } from "react-redux";
 import Spinner from "../components/Spinner";
 import RecipeCard from "../components/RecipeCard";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { addParams } from "../features/slices/recipeSlice";
-
+import noDataImg from '../assets/no-data.jpg'
 export default function Recipe() {
   const recipes = useSelector((state) => state.recipe.recipes);
   const isLoading = useSelector((state) => state.loading.isLoading);
   const isError = useSelector((state) => state.error.isError);
+  const okRef = useRef(true);
   const dispatch = useDispatch();
 
+  console.log(recipes)
+
   useEffect(() => {
+    okRef.current = recipes.ok
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, [recipes, isError]);
@@ -63,9 +67,14 @@ export default function Recipe() {
         {isLoading ? (
           <Spinner />
         ) : (
-          recipes.hits?.map((item, index) => (
+          okRef.current ? recipes.hits?.map((item, index) => (
             <RecipeCard recipe={item.recipe} key={index} />
-          ))
+          )):(
+            <div className="w-full text-center text-3xl font-bold">
+             <img src={noDataImg} alt="noDataImg" className="h-96 mx-auto"/>
+              <p>Ups... no hay resultados</p>
+            </div>
+          )
         )}
       </div>
     </>
