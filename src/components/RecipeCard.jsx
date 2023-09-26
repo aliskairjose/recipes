@@ -23,7 +23,7 @@ export default function RecipeCard({ recipe }) {
         <div className="text-sm h-10 overflow-hidden">{recipe.label}</div>
         <div className="flex justify-around uppercase text-xs my-2">
           <div>
-            <span className="me-1 text-sky-600 font-semibold">180</span>
+            <span className="me-1 text-sky-600 font-semibold">{Math.floor(recipe.calories)/10}</span>
             <span>Calorias</span>
           </div>
           <div>
