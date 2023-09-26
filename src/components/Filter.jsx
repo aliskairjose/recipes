@@ -254,7 +254,7 @@ export default function Filter() {
       </div>
 
       <span className="text-sm block">Diet</span>
-      <div className="grid xl:grid-cols-2 grid-cols-1 mb-4 mt-2">
+      <div className="grid grid-cols-2 mb-4 mt-2">
         <div>
           <ul>
             <li>
@@ -300,7 +300,7 @@ export default function Filter() {
       <div className="border my-4"></div>
 
       <span className="text-sm">Allergies</span>
-      <div className="grid xl:grid-cols-2 grid-cols-1 mb-4 mt-2">
+      <div className="grid grid-cols-2 mb-4 mt-2">
         <div>
           <ul>
             <li>

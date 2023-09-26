@@ -33,7 +33,7 @@ export default function Sidebar() {
       <aside
         id="default-sidebar"
         className={`
-        fixed md:top-0 left-0 z-20 lg:w-64 md:w-52 w-80 h-screen transition-transform sm:translate-x-0 px-4 pt-8 border-r bg-white
+        fixed md:top-0 left-0 z-20 lg:w-64 md:w-52 w-11/12 h-screen transition-transform sm:translate-x-0 px-4 border-r bg-white
         ${isOpen ? "" : "-translate-x-full"}
         `}
         aria-label="Sidebar"
