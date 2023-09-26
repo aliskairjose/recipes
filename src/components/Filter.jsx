@@ -143,7 +143,7 @@ const ALLERGIES_COL2 = [
 export default function Filter() {
   const dispatch = useDispatch();
   const paramSelector = useSelector((state) => state.recipe.params);
-  const queryParams = useRef(null);
+  const queryParams = useRef({q:''});
   const [query, setQuery] = useState(null);
   const inputRef = createRef();
   const hitsRef = useRef([]);
