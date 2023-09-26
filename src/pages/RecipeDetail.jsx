@@ -26,7 +26,9 @@ export default function RecipeDetail() {
           />
         </div>
         <div className="xl:py-6 xl:px-4 p-4 md:w-1/2 w-full">
-          <h1 className="lg:text-3xl text-2xl text-center mb-3 tracking-wide">{recipe.label}</h1>
+          <h1 className="lg:text-3xl text-2xl text-center mb-3 tracking-wide">
+            {recipe.label}
+          </h1>
           <a
             href={recipe.url}
             target="_blank"
@@ -73,11 +75,23 @@ export default function RecipeDetail() {
             {recipe.ingredients?.length} Ingredients
           </h1>
           <ul className="list-outside space-y-2 capitalize">
-            {recipe.ingredientLines?.map((item, index) => <li key={index}>{item}</li>)}
+            {recipe.ingredientLines?.map((item, index) => (
+              <li key={index}>{item}</li>
+            ))}
           </ul>
           <h1 className="text-lg text-gray-500 font-semibold tracking-wider border-b pb-2 my-6">
             Preparation
           </h1>
+
+          <a href={recipe.url} target="_blank" rel="noopener noreferrer">
+            <button
+              className="bg-gray-200 text-black text-sm border border-gray-300 font-light py-1 px-4 rounded me-1 shadow"
+              type="button"
+            >
+              Instructions
+            </button>
+            on: <span className="underline">{recipe.source}</span>
+          </a>
         </div>
         <div className="md:w-1/2 w-full xl:px-8 p-4">
           <h1 className="text-lg text-gray-500 font-semibold tracking-wider border-b pb-2">
@@ -85,7 +99,7 @@ export default function RecipeDetail() {
           </h1>
           <div className="flex justify-around py-4 border-b">
             <p className="text-center">
-              <span className="text-xl block py-1 px-6">190 </span>
+              <span className="text-xl block py-1 px-6">{Math.floor(recipe.calories)/10}</span>
               <span className="text-xs">CALORIES / SERVING</span>
             </p>
             <p className="text-center">
