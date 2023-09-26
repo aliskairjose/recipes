@@ -17,13 +17,12 @@ export default function Recipe() {
 
   const handleScroll = () => {
     if (
-      window.innerHeight + document.documentElement.scrollTop !==
-        document.documentElement.offsetHeight ||
+      window.innerHeight + document.documentElement.scrollTop <
+        document.documentElement.offsetHeight - 100 ||
       isLoading
     ) {
       return;
     }
-
     const { more, from, to } = recipes;
     more && !isError && fetchData({ from, to });
   };
