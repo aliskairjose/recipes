@@ -7,7 +7,7 @@ export default function Footer() {
   return (
     <footer className="w-full z-40 fixed bottom-0 bg-white">
       <hr className="h-0.5 border-t-0  bg-neutral-100 opacity-100 dark:opacity-50 " />
-      <div className="flex lg:flex-row flex-col items-center lg:p-6 p-4">
+      <div className="flex lg:flex-row flex-col items-center lg:py-3 lg:px-6 p-4">
         <div className="flex lg:flex-1 flex-none text-left md:text-base text-sm">
           © {date.getFullYear()}. Desarrollada con
           <img src={reactLogo} className="ms-1 h-5" />
